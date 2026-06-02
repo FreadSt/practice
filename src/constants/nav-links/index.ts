@@ -1,7 +1,7 @@
 import {
   ContactIcon,
   HomeIcon,
-  LayoutDashboard, LogInIcon,
+  LayoutDashboard,
   type LucideIcon, UserIcon
 } from 'lucide-react';
 
@@ -16,5 +16,4 @@ export const NAV_LINKS: Link[] = [
   { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
   { name: "Contact", path: "/contact", icon: ContactIcon },
   { name: "Users", path: "/users", icon: UserIcon },
-  { name: "Auth", path: "/auth", icon: LogInIcon },
 ];
