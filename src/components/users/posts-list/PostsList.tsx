@@ -10,12 +10,22 @@ interface Post {
 export const PostsList = () => {
   const selectPostId = useSelectedPost((state) => state.selectPostId)
   const selectedUserId = useSelectedUser((state) => state.selectedId)
-  const {data: posts = [], isPending: isPostsPending} = usePostsByUserId(selectedUserId as number);
+
+  const userId = selectedUserId ?? 0
+
+  const {data: posts = [], isPending: isPostsPending, isFetching, isError} = usePostsByUserId(userId);
 
   return(
     <div>
       <h3 className="font-bold underline">User post</h3>
+      {!selectedUserId && <p className="mt-2 text-sm text-gray-500">Select user first</p>}
       {selectedUserId && isPostsPending && <Loader />}
+      {selectedUserId && isError && (
+        <p className="mt-2 text-sm text-red-600">Failed to load posts</p>
+      )}
+      {selectedUserId && !isPostsPending && isFetching && (
+        <p className="mt-2 text-xs text-gray-500">Refreshing…</p>
+      )}
       {posts?.map((post: Post) => (
         <div key={post.id} onClick={() => selectPostId(post.id)}
              className="hover:border-b-2 transform-border p-3 cursor-pointer hover:bg-gray-50">
