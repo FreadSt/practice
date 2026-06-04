@@ -8,12 +8,15 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
+const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID
+const domain = import.meta.env.VITE_AUTH0_DOMAIN
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient} >
       <Auth0Provider
-        domain="dev-f6rj6ene0p76xwzx.us.auth0.com"
-        clientId="0KzArq6VTbzb4WtkGC78r9ablr4abikR"
+        domain={domain}
+        clientId={clientId}
         authorizationParams={{ redirect_uri: window.location.origin }}
         cacheLocation="localstorage"
         useRefreshTokens={true}
